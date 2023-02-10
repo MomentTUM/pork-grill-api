@@ -25,8 +25,8 @@ module.exports = async (req, res, next) => {
     if (!Customer) {
       createError("you are unathorized", 401)
     }
-    req.user = admin
-    req.user = customer
+    req.user = admin || customer
+    // req.user = customer
     next()
   } catch (err) {
     next(err)

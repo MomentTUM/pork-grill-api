@@ -1,5 +1,5 @@
-// const { sequelize } = require("./models/")
-// sequelize.sync({ force: true })
+// const { Category } = require("./models")
+// Category.sync({ alter: true })
 
 require("dotenv").config()
 const express = require("express")
@@ -9,8 +9,10 @@ const cors = require("cors")
 const helmet = require("helmet")
 const rateLimit = require("express-rate-limit")
 const authRoute = require("./routes/auth-route")
+const tableRoute = require('./routes/table-route')
 const notFoundMiddleware = require("./middlewares/not-found")
-const errorMiddleware = require("./middlewares/error")
+const errorMiddleware = require("./middlewares/error");
+const authenticate = require("./middlewares/authenticate");
 
 const app = express()
 
@@ -26,6 +28,7 @@ app.use(helmet())
 app.use(express.json())
 
 app.use("/auth", authRoute)
+app.use('/table',authenticate, tableRoute)
 
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)

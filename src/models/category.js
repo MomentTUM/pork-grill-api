@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      image: DataTypes.STRING,
     },
     { underscored: true }
   )

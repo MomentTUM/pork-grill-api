@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs")
-const { Admin,Customer } = require("../models")
+const { TABLE_BUSY, TABLE_AVAILABLE } = require("../config/constant")
+const { Admin,Customer,Table } = require("../models")
 const createError = require("../utils/create-error")
 const Op = require('sequelize')
 const jwt = require("jsonwebtoken")
@@ -20,8 +21,9 @@ exports.register = async (req, res, next) => {
 exports.registerCustomer = async (req, res, next) => {
   try {
     const value = req.body
-    value.phone = await bcrypt.hash(String(value.phone), 12)
-    await Customer.create(value)
+    const newCustomer = await Customer.create(value)
+    await Table.update({ CustomerId: newCustomer.id,status: TABLE_BUSY }, {where: {id: +value.tableId}})
+    // await Table.update({status: TABLE_BUSY},{where:{id: +value.tableId}})
     res.status(201).json({ message: "register  Customer success." })
   } catch (err) {
     next(err)
@@ -33,10 +35,7 @@ exports.loginAdmin = async (req, res, next) => {
     const value = req.body
     const admin = await Admin.findOne({
       where: 
-        
           { username: value.username },
-          
-       
     })
     if (!admin) {
       createError('invalid username or password',400)
@@ -66,19 +65,30 @@ exports.loginAdmin = async (req, res, next) => {
   }
 }
 
-exports.loginUser = async (req, res, next) => {
+exports.loginCustomer = async (req, res, next) => {
   try {
     const value = req.body
     const customer = await Customer.findOne({
-      where: {
-        [Op.or]: [
-          { phone: value.phone },
-        ],
-      },
+      where:  
+          { phone: value.phone },     
     })
     if (!customer) {
-      createError('invalid username or password',400)
+      createError('invalid phone number',400)
     }
+    const accessToken = jwt.sign(
+      {
+        id: customer.id,
+        adult: customer.adult,
+        kid: customer.kid,
+        phone: customer.phone,
+        checkin: customer.checkin
+      },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+      }
+    )
+    res.status(200).json({ accessToken })
   } catch (err) {
     next(err)
   }

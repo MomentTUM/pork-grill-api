@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       checkin: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     Customer.belongsTo(db.Admin, {
       foreignKey: {
         name: "adminId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })

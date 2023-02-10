@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     Admin.hasMany(db.Customer, {
       foreignKey: {
         name: "adminId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })
