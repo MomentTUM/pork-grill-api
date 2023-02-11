@@ -23,14 +23,14 @@ module.exports = (sequelize, DataTypes) => {
     Table.belongsTo(db.Admin, {
       foreignKey: {
         name: "adminId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })
     Table.belongsTo(db.Customer, {
       foreignKey: {
         name: "CustomerId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })

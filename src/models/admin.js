@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     Admin.hasMany(db.Table, {
       foreignKey: {
         name: "adminId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })

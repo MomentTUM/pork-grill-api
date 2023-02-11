@@ -4,21 +4,21 @@ module.exports = (sequelize) => {
     Order.belongsTo(db.Customer, {
       foreignKey: {
         name: "CustomerId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })
     Order.hasMany(db.OrderItem, {
       foreignKey: {
         name: "orderId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })
     Order.hasOne(db.Payment, {
       foreignKey: {
         name: "orderId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })

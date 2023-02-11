@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       paymentType: {
         type: DataTypes.ENUM(PAYMENT_CASH, PAYMENT_TRANSFER),
-        allowNull: false,
+        allowNull: true,
       },
       totalPrice: {
         type: DataTypes.DECIMAL,
-        allowNull: false,
+        allowNull: true,
         validate: {
           notEmpty: true,
         },
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
           PAYMENT_COMPLETED,
           PAYMENT_FAIL
         ),
-        allowNull: false,
+        allowNull: true,
         dafaultValue: PAYMENT_PENDING,
       },
     },
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     Payment.belongsTo(db.Order, {
       foreignKey: {
         name: "orderId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })

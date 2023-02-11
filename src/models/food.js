@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      detail: DataTypes.STRING,
       currentPrice: {
         type: DataTypes.DECIMAL,
         allowNull: false,
@@ -26,14 +27,14 @@ module.exports = (sequelize, DataTypes) => {
     Food.hasMany(db.OrderItem, {
       foreignKey: {
         name: "foodId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })
     Food.belongsTo(db.Category, {
       foreignKey: {
         name: "categoryId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })

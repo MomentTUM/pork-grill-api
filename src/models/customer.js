@@ -33,14 +33,14 @@ module.exports = (sequelize, DataTypes) => {
     Customer.hasOne(db.Table, {
       foreignKey: {
         name: "CustomerId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })
     Customer.hasMany(db.Order, {
       foreignKey: {
         name: "CustomerId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })

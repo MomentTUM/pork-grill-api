@@ -4,14 +4,14 @@ module.exports = (sequelize, DataTypes) => {
     {
       quantity: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
           notEmpty: true,
         },
       },
       price: {
         type: DataTypes.DECIMAL,
-        allowNull: false,
+        allowNull: true,
         validate: {
           notEmpty: true,
         },
@@ -23,14 +23,14 @@ module.exports = (sequelize, DataTypes) => {
     OrderItem.belongsTo(db.Order, {
       foreignKey: {
         name: "orderId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })
     OrderItem.belongsTo(db.Food, {
       foreignKey: {
         name: "foodId",
-        allowNull: false,
+        allowNull: true,
       },
       onDelete: "RESTRICT",
     })
