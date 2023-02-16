@@ -1,5 +1,5 @@
-// const { Category } = require("./models")
-// Category.sync({ alter: true })
+// const { Payment } = require("./models")
+// Payment.sync({ alter: true })
 
 require("dotenv").config()
 const express = require("express")
@@ -10,6 +10,8 @@ const helmet = require("helmet")
 const rateLimit = require("express-rate-limit")
 const authRoute = require("./routes/auth-route")
 const tableRoute = require('./routes/table-route')
+const productRoute = require('./routes/products-route')
+const cartRouste = require('./routes/cart-route')
 const notFoundMiddleware = require("./middlewares/not-found")
 const errorMiddleware = require("./middlewares/error");
 const authenticate = require("./middlewares/authenticate");
@@ -29,6 +31,8 @@ app.use(express.json())
 
 app.use("/auth", authRoute)
 app.use('/table',authenticate, tableRoute)
+app.use('/product', productRoute)
+app.use('/cart',authenticate, cartRouste)
 
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)

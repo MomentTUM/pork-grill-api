@@ -23,7 +23,6 @@ exports.registerCustomer = async (req, res, next) => {
     const value = req.body
     const newCustomer = await Customer.create(value)
     await Table.update({ CustomerId: newCustomer.id,status: TABLE_BUSY }, {where: {id: +value.tableId}})
-    // await Table.update({status: TABLE_BUSY},{where:{id: +value.tableId}})
     res.status(201).json({ message: "register  Customer success." })
   } catch (err) {
     next(err)
@@ -97,3 +96,4 @@ exports.loginCustomer = async (req, res, next) => {
 exports.getMe = (req, res, next) => {
   res.status(200).json({ user: req.user })
 }
+

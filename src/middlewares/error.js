@@ -2,7 +2,6 @@ const chalk = require("chalk");
 
 module.exports = (err, req, res, next) => {
   console.log(chalk.bgRedBright(err));
-  console.log(err);
   if (err.name === "ValidationError") {
     err.statusCode = 400;
   } else if (err.name === "TokenExpiredError") {

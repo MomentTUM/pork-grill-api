@@ -14,19 +14,15 @@ module.exports = async (req, res, next) => {
       where: { id: payload.id },
       attributes: { exclude: ["password"] },
     })
-    if (!admin) {
-      createError("you are unathorized", 401)
-    }
 
     const customer = await Customer.findOne({
       where: { id: payload.id },
       attributes: { exclude: ["phone"] },
     })
-    if (!Customer) {
+    if (!customer && !admin) {
       createError("you are unathorized", 401)
     }
     req.user = admin || customer
-    // req.user = customer
     next()
   } catch (err) {
     next(err)

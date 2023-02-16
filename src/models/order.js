@@ -15,13 +15,6 @@ module.exports = (sequelize) => {
       },
       onDelete: "RESTRICT",
     })
-    Order.hasOne(db.Payment, {
-      foreignKey: {
-        name: "orderId",
-        allowNull: true,
-      },
-      onDelete: "RESTRICT",
-    })
   }
   return Order
 }

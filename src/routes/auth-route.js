@@ -12,4 +12,5 @@ router.post('/login/admin',authController.loginAdmin)
 router.post('/login/customer',authController.loginCustomer)
 
 router.get("/me",authenticate, authController.getMe)
+
 module.exports = router
