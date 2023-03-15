@@ -1,4 +1,5 @@
-// const { Payment } = require("./models")
+// const { sequelize } = require("./models")
+// sequelize.sync({ alter: true })
 // Payment.sync({ alter: true })
 
 require("dotenv").config()
@@ -12,6 +13,7 @@ const authRoute = require("./routes/auth-route")
 const tableRoute = require('./routes/table-route')
 const productRoute = require('./routes/products-route')
 const cartRouste = require('./routes/cart-route')
+const paymentRouste = require('./routes/payment-route')
 const notFoundMiddleware = require("./middlewares/not-found")
 const errorMiddleware = require("./middlewares/error");
 const authenticate = require("./middlewares/authenticate");
@@ -33,6 +35,7 @@ app.use("/auth", authRoute)
 app.use('/table',authenticate, tableRoute)
 app.use('/product', productRoute)
 app.use('/cart',authenticate, cartRouste)
+app.use('/payment',authenticate, paymentRouste)
 
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)

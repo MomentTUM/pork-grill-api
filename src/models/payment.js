@@ -29,12 +29,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         dafaultValue: PAYMENT_PENDING,
       },
+      slipImage: DataTypes.STRING,
     },
     {
       underscored: true,
     }
   )
   Payment.associate = db => {
+    // Payment.hasMany(db.Order, {
+    //   foreignKey: {
+    //     name: "paymentId",
+    //     allowNull: true,
+    //   },
+    //   onDelete: "RESTRICT",
+    // })
     Payment.belongsTo(db.Customer, {
       foreignKey: {
         name: "CustomerId",
@@ -42,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: "RESTRICT",
     })
+    
   }
   return Payment
 }

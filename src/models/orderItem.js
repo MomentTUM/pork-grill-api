@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      // orderStatus: {
+      //   type: DataTypes.ENUM(
+      //     "PENDING", "SUCCESS"),
+      //   allowNull: true,
+      //   dafaultValue: "PENDING",
+      // },
     },
     { underscored: true }
   )
@@ -26,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         name: "orderId",
         allowNull: true,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     })
     OrderItem.belongsTo(db.Food, {
       foreignKey: {

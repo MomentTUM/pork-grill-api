@@ -13,8 +13,15 @@ module.exports = (sequelize) => {
         name: "orderId",
         allowNull: true,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     })
+    // Order.belongsTo(db.Payment, {
+    //   foreignKey: {
+    //     name: "paymentId",
+    //     allowNull: true,
+    //   },
+    //   onDelete: "RESTRICT",
+    // })
   }
   return Order
 }
